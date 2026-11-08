@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<title>ArtizGran Black Friday 3D</title>
+<title>Arti’z Gran Black Friday 3D</title>
 <style>
 @font-face{font-family:Cormorant;font-weight:300;src:url(fonts/cormorant-garamond-latin-300-normal.woff2)}
 @font-face{font-family:Cormorant;font-weight:300;font-style:italic;src:url(fonts/cormorant-garamond-latin-300-italic.woff2)}
@@ -62,7 +62,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 
   <!-- Cena 1: abertura -->
   <div class="layer" id="C1">
-    <div class="center brand" style="top:300px" id="c1brand"><span class="gold">ArtizGran</span><small>MÁRMORES · GRANITOS · QUARTZITOS</small></div>
+    <div class="center brand" style="top:300px" id="c1brand"><span class="gold brandname">Arti’z Gran</span><img class="logo" alt="Arti’z Gran" style="display:none;max-width:520px;max-height:210px;margin:0 auto 6px"><small>MÁRMORES · GRANITOS · QUARTZITOS</small></div>
     <div class="rule" id="c1rule" style="top:880px;width:0"></div>
     <div class="center" style="top:640px"><span class="mask"><span id="c1black" class="serif" style="font-weight:300;font-size:210px;letter-spacing:.14em;line-height:1">BLACK</span></span></div>
     <div class="center" style="top:900px"><span class="mask"><span id="c1friday" class="serif gold" style="font-weight:300;font-style:italic;font-size:230px;line-height:1.05">Friday</span></span></div>
@@ -97,7 +97,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 
   <!-- Cena 6: CTA WhatsApp -->
   <div class="layer" id="C6">
-    <div class="center brand" style="top:300px"><span class="gold">ArtizGran</span><small>MÁRMORES · GRANITOS · QUARTZITOS</small></div>
+    <div class="center brand" style="top:300px"><span class="gold brandname">Arti’z Gran</span><img class="logo" alt="Arti’z Gran" style="display:none;max-width:520px;max-height:210px;margin:0 auto 6px"><small>MÁRMORES · GRANITOS · QUARTZITOS</small></div>
     <div class="center serif" style="top:700px;font-size:110px;font-weight:300;line-height:1.05" id="c6a">Garanta já o<br><span class="gold" style="font-style:italic">seu desconto</span></div>
     <div class="center eyebrow" style="top:1040px" id="c6b">10% OFF · até 10x sem juros</div>
     <div class="btn" id="c6btn">
@@ -119,6 +119,19 @@ document.getElementById('c6num').textContent = WHATS;
 document.getElementById('c6addr').textContent = ENDERECO;
 document.getElementById('c5d').textContent = ENDERECO;
 
+// Logo: usa assets/logo.png se existir; senão, mantém o nome escrito
+window.logoReady = new Promise(res => {
+  const img = new Image();
+  img.onload = () => {
+    document.querySelectorAll('.brand').forEach(b => {
+      b.querySelector('.brandname').style.display = 'none';
+      const l = b.querySelector('.logo'); l.src = img.src; l.style.display = 'block';
+    });
+    res(true);
+  };
+  img.onerror = () => res(false);
+  img.src = 'assets/logo.png';
+});
 const DUR = 25;
 const $ = id => document.getElementById(id);
 const clamp = (x,a=0,b=1)=>Math.min(b,Math.max(a,x));

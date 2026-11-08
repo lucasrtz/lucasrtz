@@ -37,6 +37,7 @@ const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.jpg': 'image/jp
   await page.evaluate(() => document.fonts.ready);
   await page.waitForFunction(() => window.render && (!document.getElementById('gl') || window.ready3d));
   await page.evaluate(() => window.ready3d);
+  await page.evaluate(() => window.logoReady);
   await page.waitForTimeout(300);
   const DUR = await page.evaluate(() => window.DUR);
 
