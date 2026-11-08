@@ -1,6 +1,6 @@
 """Trilha sonora original (sintetizada) — pad elegante, graves suaves, impactos nas transições.
 
-Uso: python3 gerar_trilha.py [duracao_seg]
+Uso: python3 gerar_trilha.py [duracao_seg] [impactos_seg_separados_por_virgula]
 Saída: assets/trilha.wav
 """
 import os, sys, wave
@@ -80,7 +80,8 @@ for k, start in enumerate(np.arange(10.6, 21.0, step)):
     add(s * 0.05, start, pan=0.5 * np.sin(k * 1.3))
 
 # --- Impactos (boom grave + brilho) nas viradas de cena
-for hit in (0.15, 4.2, 7.4, 10.6, 17.8, 21.0):
+HITS = [float(x) for x in sys.argv[2].split(',')] if len(sys.argv) > 2 else [0.15, 4.2, 7.4, 10.6, 17.8, 21.0]
+for hit in HITS:
     n = int(2.5 * SR); tt = np.arange(n) / SR
     f = 70 * np.exp(-tt * 1.6) + 38
     boom = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-tt * 2.2)
