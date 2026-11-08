@@ -9,10 +9,12 @@ import os, sys, wave
 import numpy as np
 
 SR = 48000
+EFEITOS = '--efeitos' in sys.argv  # só efeitos (sem música), para adicionar a música no app do Instagram
+sys.argv = [a for a in sys.argv if a != '--efeitos']
 DUR = float(sys.argv[1]) if len(sys.argv) > 1 else 25.0
 HITS = [float(x) for x in sys.argv[2].split(',')] if len(sys.argv) > 2 else [1.35, 11.25, 13.05, 14.85, 16.65, 18.45]
 N = int(SR * DUR)
-OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets", "trilha.wav")
+OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets", "trilha_efeitos.wav" if EFEITOS else "trilha.wav")
 rng = np.random.default_rng(11)
 
 BEAT = 0.45                 # 133,3 bpm: as chapas pousam a cada 4 tempos (1,8s)
@@ -146,11 +148,12 @@ def chord_at(t):
 
 K = kick(); C = clap(); HC = hat(); HO = hat(True)
 
+MUSICA = not EFEITOS
 # introdução: pad filtrado + subida até o primeiro pouso
-add(lp(pad(CH[0], DROP1 + 0.4), 900), 0, gain=0.5)
+if MUSICA: add(lp(pad(CH[0], DROP1 + 0.4), 900), 0, gain=0.5)
 add(riser(DROP1), 0, gain=0.35)
 
-beats = np.arange(T0, END + 1e-6, BEAT)
+beats = np.arange(T0, END + 1e-6, BEAT) if MUSICA else []
 for b in beats:
     in_break = BREAK <= b < DROP2
     n = int(round((b - T0) / BEAT))
@@ -174,14 +177,14 @@ for b in beats:
         add(stab(CH[ci]), b + off, gain=0.32, pan=0.2 if n % 8 < 4 else -0.2)
 
 # pad contínuo (com sidechain) a partir do drop
-pos = T0
+pos = T0 if MUSICA else END
 while pos < END:
     ci = chord_at(pos + 0.01); ln = min(BAR * 2, END + 1 - pos)
     add(pad(CH[ci], ln + 0.3), pos, gain=0.28, pan=0.0)
     pos += BAR * 2
 
 # arpejo cristalino na seção das pedras e no final
-for k, b in enumerate(np.arange(DROP2, END, BEAT / 2)):
+for k, b in enumerate(np.arange(DROP2, END, BEAT / 2) if MUSICA else []):
     ci = chord_at(b); notes = [m + 12 for m in CH[ci][1:]]
     add(pluck(notes[k % len(notes)]), b, gain=0.07, pan=0.6 * np.sin(k * 0.9))
 
@@ -192,7 +195,7 @@ add(riser(DROP2 - BREAK), BREAK, gain=0.45)
 for h in HITS:
     add(impact(), h, gain=0.55, bus=(KL, KR))
 add(impact(), END, gain=0.7, bus=(KL, KR))
-add(pad(CH[0], 2.0), END, gain=0.35)
+if MUSICA: add(pad(CH[0], 2.0), END, gain=0.35)
 
 # aplica sidechain no mix (o bumbo e os impactos ficam de fora)
 SC = lp(SC, 200, 1)
