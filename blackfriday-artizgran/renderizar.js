@@ -1,5 +1,5 @@
 // Renderiza video.html quadro a quadro e monta o MP4 com a trilha.
-// Uso: node renderizar.js [--page video3d.html] [--whats "(00) 00000-0000"] [--endereco "Rua X, 123 - Cidade"] [--fps 30] [--blur 2] [--hits 1.35,11.25] [--out saida.mp4] [--stills]
+// Uso: node renderizar.js [--page video3d.html] [--whats "(00) 00000-0000"] [--endereco "Rua X, 123 - Cidade"] [--fps 30] [--blur 2] [--hits 1.35,11.25] [--out saida.mp4] [--stills] [--continuar]
 const { chromium } = require('playwright');
 const { execFileSync } = require('child_process');
 const fs = require('fs');
@@ -44,8 +44,10 @@ const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.jpg': 'image/jp
   const total = STILLS ? times.length : Math.round(DUR * FPS * SUB);
   for (let f = 0; f < total; f++) {
     const t = STILLS ? times[f] : f / (FPS * SUB);
+    const file = path.join(FRAMES, `f${String(f).padStart(5, '0')}.jpg`);
+    if (!STILLS && args.includes('--continuar') && fs.existsSync(file)) continue;
     await page.evaluate(t => window.render(t), t);
-    await page.screenshot({ path: path.join(FRAMES, `f${String(f).padStart(5, '0')}.jpg`), type: 'jpeg', quality: 95 });
+    await page.screenshot({ path: file, type: 'jpeg', quality: 95 });
     if (f % 60 === 0) process.stdout.write(`\rquadro ${f}/${total}`);
   }
   await browser.close();
