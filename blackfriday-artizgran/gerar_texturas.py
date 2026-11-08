@@ -119,5 +119,57 @@ def patagonia(seed=5):
     save(arr, "quartzito_exotico.jpg", blur=0.8)
 
 
+def crystal_mint(seed=6):
+    """Quartzito Crystal Mint: verde-menta translúcido com faixas verdes e veios cristalinos brancos."""
+    rng = np.random.default_rng(seed)
+    band = veins(W, H, rng, 70, 0.0018, 3.2, 1.6, base=1000, octaves=6)
+    deep = veins(W, H, rng, 66, 0.0035, 3.0, 8, base=800, octaves=8)
+    v1 = veins(W, H, rng, 72, 0.0026, 3.4, 40, base=900, octaves=8)
+    v2 = veins(W, H, rng, 62, 0.007, 2.6, 70, base=600, octaves=8)
+    spark = np.clip((rng.random((H, W)) - 0.9965) * 300, 0, 1).astype(np.float32)
+    arr = colorize([(band, (128, 182, 160), 0.7), (deep, (70, 138, 118), 0.65),
+                    (v2, (214, 236, 226), 0.55), (v1, (246, 252, 248), 0.9), (spark, (255, 255, 255), 0.6)],
+                   (182, 214, 198), (30, 34, 30), rng)
+    save(arr, "crystal_mint.jpg")
+
+
+def imperador(seed=7):
+    """Mármore Marrom Imperador: café/chocolate com rede de veios claros."""
+    rng = np.random.default_rng(seed)
+    haze = veins(W, H, rng, 50, 0.003, 3.0, 2.5, base=800, octaves=5)
+    v1 = veins(W, H, rng, 50, 0.004, 3.4, 26, base=700, octaves=8)
+    v2 = veins(W, H, rng, -35, 0.009, 3.0, 50, base=400, octaves=8)
+    v3 = veins(W, H, rng, 15, 0.014, 2.6, 80, base=300, octaves=8)
+    arr = colorize([(haze, (70, 46, 32), 0.6), (v3, (150, 118, 90), 0.5),
+                    (v2, (190, 160, 128), 0.65), (v1, (226, 206, 178), 0.85)],
+                   (98, 66, 46), (30, 20, 14), rng, 0.025)
+    save(arr, "marmore_imperador.jpg")
+
+
+def parana_branco(seed=8):
+    """Mármore Paraná branco: fundo branco luminoso com veios cinza suaves."""
+    rng = np.random.default_rng(seed)
+    haze = veins(W, H, rng, 80, 0.004, 2.6, 3, base=800, octaves=5)
+    v1 = veins(W, H, rng, 80, 0.004, 2.6, 22, base=800, octaves=8)
+    v2 = veins(W, H, rng, 95, 0.009, 2.2, 55, base=500, octaves=8)
+    arr = colorize([(haze, (226, 227, 226), 0.5), (v2, (178, 181, 182), 0.45),
+                    (v1, (150, 154, 156), 0.6)], (246, 245, 241), (10, 10, 9), rng, 0.02)
+    save(arr, "marmore_parana.jpg", blur=0.9)
+
+
+def sao_gabriel(seed=9):
+    """Granito Preto São Gabriel: preto com grãos finos cinza e pontos brilhantes."""
+    rng = np.random.default_rng(seed)
+    g1 = np.clip((value_noise(W, H, 4, rng) - 0.78) * 6, 0, 1)
+    g2 = np.clip((value_noise(W, H, 3, rng) - 0.86) * 9, 0, 1)
+    g3 = np.clip((value_noise(W, H, 7, rng) - 0.82) * 5, 0, 1)
+    spark = np.clip((rng.random((H, W)) - 0.997) * 300, 0, 1).astype(np.float32)
+    arr = colorize([(g3, (48, 48, 50), 0.8), (g1, (84, 84, 86), 0.75),
+                    (g2, (138, 138, 140), 0.7), (spark, (220, 220, 222), 0.8)],
+                   (18, 18, 20), (8, 8, 8), rng, 0.03)
+    save(arr, "granito_sao_gabriel.jpg", blur=0.5)
+
+
 if __name__ == "__main__":
     nero(); carrara(); parana(); taj(); patagonia()
+    crystal_mint(); imperador(); parana_branco(); sao_gabriel()

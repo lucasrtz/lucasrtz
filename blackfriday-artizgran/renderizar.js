@@ -1,5 +1,5 @@
 // Renderiza video.html quadro a quadro e monta o MP4 com a trilha.
-// Uso: node renderizar.js [--page video3d.html] [--whats "(00) 00000-0000"] [--endereco "Rua X, 123 - Cidade"] [--fps 30] [--blur 2] [--hits 1.35,11.25] [--out saida.mp4] [--stills] [--continuar]
+// Uso: node renderizar.js [--page video3d.html] [--whats "(00) 00000-0000"] [--endereco "Rua X, 123 - Cidade"] [--fps 30] [--blur 2] [--hits 1.35,11.25] [--trilha gerar_trilha_upbeat.py] [--out saida.mp4] [--stills] [--continuar]
 const { chromium } = require('playwright');
 const { execFileSync } = require('child_process');
 const fs = require('fs');
@@ -55,7 +55,7 @@ const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.jpg': 'image/jp
   console.log('\nquadros prontos');
   if (STILLS) return;
 
-  execFileSync('python3', [path.join(DIR, 'gerar_trilha.py'), String(DUR), ...(HITS ? [HITS] : [])], { stdio: 'inherit' });
+  execFileSync('python3', [path.join(DIR, opt('trilha', 'gerar_trilha.py')), String(DUR), ...(HITS ? [HITS] : [])], { stdio: 'inherit' });
   execFileSync('ffmpeg', ['-y', '-hide_banner', '-loglevel', 'error',
     '-framerate', String(FPS * SUB), '-i', path.join(FRAMES, 'f%05d.jpg'),
     '-i', path.join(DIR, 'assets', 'trilha.wav'),

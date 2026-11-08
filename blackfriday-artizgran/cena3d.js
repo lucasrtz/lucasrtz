@@ -57,8 +57,8 @@ function pose(m, t, { start, land, exit, rest, dir = 1, turns = 1.25, from = 4.2
 
 const slabs = {};
 window.ready3d = (async () => {
-  const [nero, q, m, pr, ex] = await Promise.all(['assets/nero.jpg', 'assets/quartzito.jpg', 'assets/marmore.jpg',
-    'assets/marmore_parana.jpg', 'assets/quartzito_exotico.jpg'].map(load));
+  const [nero, q, m, pr, ex] = await Promise.all(['assets/nero.jpg', 'assets/crystal_mint.jpg', 'assets/marmore_imperador.jpg',
+    'assets/marmore_parana.jpg', 'assets/granito_sao_gabriel.jpg'].map(load));
   slabs.nero = makeSlab(nero, 0x9a9a9a);
   slabs.nero2 = makeSlab(nero, 0x9a9a9a);
   slabs.s = [q, m, pr, ex].map(tx => makeSlab(tx));
@@ -77,9 +77,9 @@ window.render3d = t => {
     pose(s, t, { start: a - 0.15, land: a + 0.65, exit: a + sd - 0.3, rest: { x: 0, y: 0.28, z: 0.8 }, dir: i % 2 ? -1 : 1, turns: 1.25, ry: 0.28, rx: -0.06 });
   });
   // volta a chapa negra para showroom + CTA
-  pose(slabs.nero2, t, { start: 17.5, land: 18.55, rest: big, dir: -1, turns: 1.5, from: 3.2 });
+  pose(slabs.nero2, t, { start: 17.5, land: 18.45, rest: big, dir: -1, turns: 1.5, from: 3.2 });
   // reflexo dourado varrendo após cada pouso
-  const lands = [1.35, 11.25, 13.05, 14.85, 16.65, 18.55];
+  const lands = [1.35, 11.25, 13.05, 14.85, 16.65, 18.45];
   let sw = 0, sx = 0;
   for (const L of lands) { const p = prog(t, L, L + 1.1); if (p > 0 && p < 1) { sw = Math.sin(p * Math.PI) * 2.6; sx = -1.5 + 3 * p; } }
   sweep.intensity = sw; sweep.position.set(sx, sx * 0.6, 3.2);
