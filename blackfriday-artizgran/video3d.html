@@ -45,6 +45,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
   <div class="layer" id="Lnero" style="opacity:1">
     <div class="bg" id="bgNero" style="background-image:url(assets/nero.jpg);opacity:.22;filter:blur(10px)"></div>
     <div class="shade" id="neroShade" style="background:radial-gradient(ellipse at 50% 42%,rgba(60,52,40,.55) 0%,rgba(10,10,11,.6) 55%,rgba(0,0,0,.95) 100%)"></div>
+    <div id="glow" style="position:absolute;inset:0;opacity:0;background:radial-gradient(ellipse 640px 820px at 50% 40%,rgba(235,205,140,.75) 0%,rgba(190,150,90,.35) 40%,rgba(0,0,0,0) 72%)"></div>
     <canvas id="gl" width="1080" height="1920" style="position:absolute;inset:0"></canvas>
     <div class="vignette" style="opacity:.6"></div>
   </div>
@@ -196,6 +197,7 @@ function render(t){
   }
   $('badge').style.opacity = win(t,S.stones[0]+.3,S.stones[1],.6,.4);
   $('badge').style.zIndex = 9;
+  $('glow').style.opacity = win(t,S.stones[0]-.1,S.stones[1]+.2,.5,.5);
 
   // ---- Cena 5: showroom
   $('C5').style.opacity = win(t,S.c5[0],S.c5[1],.4,.4);

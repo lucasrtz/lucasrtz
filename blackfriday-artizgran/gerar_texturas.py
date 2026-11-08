@@ -164,9 +164,9 @@ def sao_gabriel(seed=9):
     g2 = np.clip((value_noise(W, H, 3, rng) - 0.86) * 9, 0, 1)
     g3 = np.clip((value_noise(W, H, 7, rng) - 0.82) * 5, 0, 1)
     spark = np.clip((rng.random((H, W)) - 0.997) * 300, 0, 1).astype(np.float32)
-    arr = colorize([(g3, (48, 48, 50), 0.8), (g1, (84, 84, 86), 0.75),
-                    (g2, (138, 138, 140), 0.7), (spark, (220, 220, 222), 0.8)],
-                   (18, 18, 20), (8, 8, 8), rng, 0.03)
+    arr = colorize([(g3, (66, 66, 68), 0.85), (g1, (110, 110, 112), 0.8),
+                    (g2, (170, 170, 172), 0.75), (spark, (235, 235, 238), 0.9)],
+                   (30, 30, 33), (14, 14, 14), rng, 0.035)
     save(arr, "granito_sao_gabriel.jpg", blur=0.5)
 
 
