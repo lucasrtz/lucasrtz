@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>ArtizGran Black Friday</title>
+<style>
+@font-face{font-family:Cormorant;font-weight:300;src:url(fonts/cormorant-garamond-latin-300-normal.woff2)}
+@font-face{font-family:Cormorant;font-weight:300;font-style:italic;src:url(fonts/cormorant-garamond-latin-300-italic.woff2)}
+@font-face{font-family:Cormorant;font-weight:500;src:url(fonts/cormorant-garamond-latin-500-normal.woff2)}
+@font-face{font-family:Cormorant;font-weight:600;src:url(fonts/cormorant-garamond-latin-600-normal.woff2)}
+@font-face{font-family:Montserrat;font-weight:300;src:url(fonts/montserrat-latin-300-normal.woff2)}
+@font-face{font-family:Montserrat;font-weight:500;src:url(fonts/montserrat-latin-500-normal.woff2)}
+@font-face{font-family:Montserrat;font-weight:600;src:url(fonts/montserrat-latin-600-normal.woff2)}
+:root{--gold1:#f6e7b8;--gold2:#d4ae62;--gold3:#9c7633;--ink:#0b0b0c}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000;color:#fff;font-family:Montserrat,sans-serif}
+.layer{position:absolute;inset:0;opacity:0}
+.bg{position:absolute;left:-160px;top:-280px;width:1400px;height:2480px;background-size:cover;will-change:transform}
+.shade{position:absolute;inset:0}
+.center{position:absolute;left:0;right:0;text-align:center}
+.gold{background:linear-gradient(100deg,var(--gold3) 0%,var(--gold2) 22%,var(--gold1) 40%,#fffaf0 var(--sh,50%),var(--gold1) 60%,var(--gold2) 78%,var(--gold3) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.eyebrow{font-family:Montserrat;font-weight:500;letter-spacing:.55em;font-size:30px;text-transform:uppercase;color:#e9dcc0}
+.serif{font-family:Cormorant;font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1}
+.rule{position:absolute;height:2px;left:50%;background:linear-gradient(90deg,transparent,var(--gold2),var(--gold1),var(--gold2),transparent);transform:translateX(-50%)}
+.mask{overflow:hidden;display:block}
+.mask>span{display:block}
+.brand{font-family:Cormorant;font-weight:500;letter-spacing:.32em;font-size:58px;text-transform:uppercase}
+.brand small{display:block;font-family:Montserrat;font-weight:300;letter-spacing:.5em;font-size:18px;margin-top:10px;color:#d8ccb2}
+.vignette{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,rgba(0,0,0,0) 40%,rgba(0,0,0,.75) 100%)}
+.label{position:absolute;left:90px;right:90px;bottom:330px}
+.label .k{font-family:Montserrat;font-weight:500;font-size:24px;letter-spacing:.5em;color:#f1e6cc}
+.label .n{font-family:Cormorant;font-weight:500;font-size:132px;line-height:1;margin-top:18px;color:#fff;text-shadow:0 6px 40px rgba(0,0,0,.5)}
+.label .d{font-family:Cormorant;font-style:italic;font-weight:300;font-size:46px;margin-top:14px;color:#f3ead6}
+.badge{position:absolute;top:120px;left:50%;transform:translateX(-50%);padding:18px 34px;border:1.5px solid rgba(232,208,150,.85);background:rgba(10,10,10,.55);backdrop-filter:blur(6px);font-family:Montserrat;font-weight:500;font-size:24px;letter-spacing:.42em;white-space:nowrap;color:#f6e7b8}
+.btn{position:absolute;left:50%;top:1180px;transform:translateX(-50%);display:flex;align-items:center;gap:26px;padding:34px 60px;border-radius:999px;background:linear-gradient(135deg,#1f1f21,#0e0e0f);border:2px solid var(--gold2);box-shadow:0 0 0 0 rgba(212,174,98,.5),0 20px 60px rgba(0,0,0,.6);white-space:nowrap}
+.btn .t{font-family:Montserrat;font-weight:600;font-size:40px;letter-spacing:.08em;color:#fff}
+.small{font-family:Montserrat;font-weight:300;font-size:28px;letter-spacing:.12em;color:#b9ad95}
+</style>
+</head>
+<body>
+<div id="stage">
+
+  <!-- Fundo mármore negro (cenas 1,2,3,5,6) -->
+  <div class="layer" id="Lnero" style="opacity:1">
+    <div class="bg" id="bgNero" style="background-image:url(assets/nero.jpg)"></div>
+    <div class="shade" id="neroShade" style="background:rgba(0,0,0,.25)"></div>
+    <div class="vignette"></div>
+  </div>
+
+  <!-- Pedras -->
+  <div class="layer" id="S0"><div class="bg" style="background-image:url(assets/quartzito.jpg)"></div><div class="shade" style="background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0) 50%,rgba(0,0,0,.72) 100%)"></div>
+    <div class="label"><div class="k">COLEÇÃO</div><div class="n">Quartzitos</div><div class="d">resistência com alma de joia</div></div></div>
+  <div class="layer" id="S1"><div class="bg" style="background-image:url(assets/marmore.jpg)"></div><div class="shade" style="background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0) 50%,rgba(0,0,0,.72) 100%)"></div>
+    <div class="label"><div class="k">COLEÇÃO</div><div class="n">Mármores</div><div class="d">a elegância atemporal</div></div></div>
+  <div class="layer" id="S2"><div class="bg" style="background-image:url(assets/marmore_parana.jpg)"></div><div class="shade" style="background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0) 50%,rgba(0,0,0,.72) 100%)"></div>
+    <div class="label"><div class="k">DESTAQUE</div><div class="n">Mármore Paraná</div><div class="d">a nobreza da pedra brasileira</div></div></div>
+  <div class="layer" id="S3"><div class="bg" style="background-image:url(assets/quartzito_exotico.jpg)"></div><div class="shade" style="background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0) 50%,rgba(0,0,0,.72) 100%)"></div>
+    <div class="label"><div class="k">EXCLUSIVOS</div><div class="n">Pedras Exóticas</div><div class="d">peças únicas, como o seu projeto</div></div></div>
+  <div class="layer" id="badge"><div class="badge">BLACK FRIDAY · 10% OFF</div></div>
+
+  <!-- Cena 1: abertura -->
+  <div class="layer" id="C1">
+    <div class="center brand" style="top:300px" id="c1brand"><span class="gold">ArtizGran</span><small>MÁRMORES · GRANITOS · QUARTZITOS</small></div>
+    <div class="rule" id="c1rule" style="top:880px;width:0"></div>
+    <div class="center" style="top:640px"><span class="mask"><span id="c1black" class="serif" style="font-weight:300;font-size:210px;letter-spacing:.14em;line-height:1">BLACK</span></span></div>
+    <div class="center" style="top:900px"><span class="mask"><span id="c1friday" class="serif gold" style="font-weight:300;font-style:italic;font-size:230px;line-height:1.05">Friday</span></span></div>
+    <div class="center eyebrow" style="top:1260px" id="c1sub">Edição Exclusiva 2026</div>
+  </div>
+
+  <!-- Cena 2: 10% -->
+  <div class="layer" id="C2">
+    <div class="center eyebrow" style="top:520px" id="c2a">Em todo o showroom</div>
+    <div class="center" style="top:600px"><span id="c2num" class="serif gold" style="display:inline-block;font-weight:500;font-size:500px;line-height:1">10%</span></div>
+    <div class="rule" id="c2rule" style="top:1150px;width:0"></div>
+    <div class="center serif" style="top:1190px;font-size:96px;font-weight:300;letter-spacing:.06em" id="c2b">de desconto</div>
+  </div>
+
+  <!-- Cena 3: 10x -->
+  <div class="layer" id="C3">
+    <div class="center eyebrow" style="top:560px" id="c3a">E ainda</div>
+    <div class="center serif" style="top:640px;font-size:120px;font-weight:300;font-style:italic" id="c3b">em até</div>
+    <div class="center" style="top:760px"><span id="c3num" class="serif gold" style="display:inline-block;font-weight:500;font-size:400px;line-height:1">10x</span></div>
+    <div class="center serif" style="top:1180px;font-size:104px;font-weight:500;letter-spacing:.04em" id="c3c">sem juros</div>
+    <div class="center eyebrow" style="top:1330px" id="c3d">no cartão de crédito</div>
+  </div>
+
+  <!-- Cena 5: showroom -->
+  <div class="layer" id="C5">
+    <div class="center eyebrow" style="top:560px" id="c5a">Venha sentir de perto</div>
+    <div class="center serif" style="top:640px;font-size:130px;font-weight:300;line-height:1.05" id="c5b">Visite nosso<br><span class="gold" style="font-style:italic">showroom</span></div>
+    <div class="rule" id="c5rule" style="top:1000px;width:0"></div>
+    <div class="center serif" style="top:1050px;font-size:54px;font-style:italic;font-weight:300;color:#efe4cc;padding:0 100px" id="c5c">Escolha a sua chapa pessoalmente,<br>com atendimento especializado.</div>
+    <div class="center small" style="top:1260px" id="c5d"></div>
+  </div>
+
+  <!-- Cena 6: CTA WhatsApp -->
+  <div class="layer" id="C6">
+    <div class="center brand" style="top:300px"><span class="gold">ArtizGran</span><small>MÁRMORES · GRANITOS · QUARTZITOS</small></div>
+    <div class="center serif" style="top:700px;font-size:110px;font-weight:300;line-height:1.05" id="c6a">Garanta já o<br><span class="gold" style="font-style:italic">seu desconto</span></div>
+    <div class="center eyebrow" style="top:1040px" id="c6b">10% OFF · até 10x sem juros</div>
+    <div class="btn" id="c6btn">
+      <svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#25D366"/><path d="M32 13c-10.5 0-19 8.2-19 18.4 0 3.6 1.1 7 3 9.8L14 51l10.2-2.7c2.4 1.2 5 1.8 7.8 1.8 10.5 0 19-8.2 19-18.4S42.5 13 32 13z" fill="#fff"/><path d="M25.6 23.5c-.5-1-1-1-1.4-1h-1.2c-.4 0-1.1.2-1.7.8s-2.2 2.1-2.2 5.2 2.2 6 2.5 6.4c.3.4 4.3 6.8 10.6 9.3 5.2 2 6.3 1.6 7.4 1.5 1.1-.1 3.6-1.5 4.1-2.9.5-1.4.5-2.6.4-2.9-.2-.3-.6-.4-1.2-.7s-3.6-1.8-4.1-2c-.6-.2-1-.3-1.4.3-.4.6-1.6 2-1.9 2.4-.4.4-.7.4-1.3.1-.6-.3-2.6-.9-4.9-3-1.8-1.6-3-3.6-3.4-4.2-.4-.6 0-.9.3-1.2.3-.3.6-.7.9-1.1.3-.4.4-.6.6-1 .2-.4.1-.8 0-1.1-.1-.3-1.4-3.4-1.9-4.7z" fill="#25D366"/></svg>
+      <span class="t">Chame no WhatsApp</span>
+    </div>
+    <div class="center serif" style="top:1360px;font-size:62px;font-weight:500;letter-spacing:.06em" id="c6num"></div>
+    <div class="center small" style="top:1460px" id="c6addr"></div>
+    <div class="center small" style="top:1760px;font-size:19px;color:#8f866f" id="c6fine">Oferta válida por tempo limitado ou enquanto durarem os estoques.<br>Parcelamento sujeito a aprovação. Consulte condições.</div>
+  </div>
+
+</div>
+<script>
+// ===== Parâmetros (via URL: ?whats=...&endereco=...) =====
+const P = new URLSearchParams(location.search);
+const WHATS = P.get('whats') || '';
+const ENDERECO = P.get('endereco') || '';
+document.getElementById('c6num').textContent = WHATS;
+document.getElementById('c6addr').textContent = ENDERECO;
+document.getElementById('c5d').textContent = ENDERECO;
+
+const DUR = 25;
+const $ = id => document.getElementById(id);
+const clamp = (x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const ease = x => { x=clamp(x); return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2; };
+const eOut = x => 1-Math.pow(1-clamp(x),3);
+const prog = (t,a,b)=>clamp((t-a)/(b-a));
+// janela de visibilidade com fade in/out
+const win = (t,a,b,fi=.5,fo=.5)=> Math.min(eOut(prog(t,a,a+fi)), 1-ease(prog(t,b-fo,b)));
+// elemento que sobe e aparece
+function rise(el,t,start,dur=.9,dist=40){ const p=eOut(prog(t,start,start+dur)); el.style.opacity=p; el.style.transform=`translateY(${(1-p)*dist}px)`; }
+function shimmer(el,t,start,dur=1.6){ const p=prog(t,start,start+dur); el.style.setProperty('--sh', (-20+140*p)+'%'); }
+
+const S = {c1:[0,4.2],c2:[4.2,7.4],c3:[7.4,10.6],stones:[10.6,17.8],c5:[17.8,21],c6:[21,DUR]};
+
+function render(t){
+  // fundo negro: zoom lento contínuo
+  const z = 1.12 - 0.1*(t/DUR);
+  $('bgNero').style.transform = `scale(${z}) rotate(${-2+3*(t/DUR)}deg) translate(${-20+40*t/DUR}px,${30-60*t/DUR}px)`;
+  $('Lnero').style.opacity = Math.max(eOut(prog(t,0,1.2)) * (1-ease(prog(t,10.3,10.9))), eOut(prog(t,17.5,18.2)));
+  $('neroShade').style.background = `rgba(0,0,0,${t<4.2?0.25:0.45})`;
+
+  // ---- Cena 1
+  const c1 = win(t,S.c1[0],S.c1[1],.01,.45); $('C1').style.opacity=c1;
+  rise($('c1brand'),t,0.3,1.2,20);
+  $('c1black').style.transform = `translateY(${(1-eOut(prog(t,0.6,1.6)))*110}%)`;
+  $('c1friday').style.transform = `translateY(${(1-eOut(prog(t,1.0,2.0)))*110}%)`;
+  $('c1rule').style.width = 760*ease(prog(t,0.5,1.8))+'px';
+  rise($('c1sub'),t,1.9,1);
+  $('c1sub').style.letterSpacing = (0.9-0.35*eOut(prog(t,1.9,3.5)))+'em';
+  shimmer($('c1friday'),t,2.0,1.8);
+
+  // ---- Cena 2
+  $('C2').style.opacity = win(t,S.c2[0],S.c2[1],.35,.4);
+  rise($('c2a'),t,4.3,.8);
+  { const p=eOut(prog(t,4.35,5.2)); const el=$('c2num'); el.style.opacity=p; el.style.transform=`scale(${1.25-0.25*p})`; el.style.filter=`blur(${(1-p)*14}px)`; }
+  shimmer($('c2num'),t,5.0,1.6);
+  $('c2rule').style.width = 620*ease(prog(t,5.0,5.9))+'px';
+  rise($('c2b'),t,5.3,.9);
+
+  // ---- Cena 3
+  $('C3').style.opacity = win(t,S.c3[0],S.c3[1],.35,.4);
+  rise($('c3a'),t,7.5,.7); rise($('c3b'),t,7.65,.8);
+  { const p=eOut(prog(t,7.8,8.6)); const el=$('c3num'); el.style.opacity=p; el.style.transform=`scale(${1.2-0.2*p})`; el.style.filter=`blur(${(1-p)*12}px)`; }
+  shimmer($('c3num'),t,8.4,1.5);
+  rise($('c3c'),t,8.5,.8); rise($('c3d'),t,8.9,.8);
+
+  // ---- Pedras (4 x 1.8s) com cortina dourada
+  const segs = 4, sd = (S.stones[1]-S.stones[0])/segs;
+  for(let i=0;i<segs;i++){
+    const a=S.stones[0]+i*sd, b=a+sd;
+    const L=$('S'+i);
+    const fadeIn = i===0? eOut(prog(t,a,a+.6)) : eOut(prog(t,a-.15,a+.45));
+    const fadeOut = i===segs-1 ? 1-ease(prog(t,b-.3,b+.2)) : 1;
+    L.style.opacity = (t>=a-.2 && t<=b+.5) ? Math.min(fadeIn,fadeOut) : 0;
+    L.style.zIndex = 1+i;
+    const p = prog(t,a-.2,b+.5);
+    const dir = i%2?1:-1;
+    L.querySelector('.bg').style.transform = `scale(${1.18-0.1*p}) translate(${dir*(-40+80*p)}px,${-30+50*p}px)`;
+    const lab = L.querySelector('.label');
+    const lp = eOut(prog(t,a+.15,a+.9));
+    lab.style.opacity = lp*(i===segs-1?fadeOut:(1-ease(prog(t,b-.4,b-.1)))); lab.style.transform=`translateY(${(1-lp)*50}px)`;
+    lab.querySelector('.n').style.letterSpacing = (0.06-0.06*lp)+'em';
+  }
+  $('badge').style.opacity = win(t,S.stones[0]+.3,S.stones[1],.6,.4);
+  $('badge').style.zIndex = 9;
+
+  // ---- Cena 5: showroom
+  $('C5').style.opacity = win(t,S.c5[0],S.c5[1],.4,.4);
+  rise($('c5a'),t,18.0,.8); rise($('c5b'),t,18.2,1.0,50);
+  $('c5rule').style.width = 520*ease(prog(t,18.8,19.7))+'px';
+  rise($('c5c'),t,19.0,.9); rise($('c5d'),t,19.4,.9);
+
+  // ---- Cena 6: CTA
+  $('C6').style.opacity = eOut(prog(t,S.c6[0],S.c6[0]+.5));
+  rise($('c6a'),t,21.2,1.0,50); rise($('c6b'),t,21.6,.9);
+  { const el=$('c6btn'); const p=eOut(prog(t,22.0,22.8)); el.style.opacity=p;
+    const pulse = t>22.8 ? (Math.sin((t-22.8)*Math.PI*1.6)*.5+.5) : 0;
+    el.style.transform=`translateX(-50%) translateY(${(1-p)*40}px) scale(${1+0.035*pulse})`;
+    el.style.boxShadow=`0 0 0 ${pulse*22}px rgba(212,174,98,${0.22*(1-pulse)}),0 20px 60px rgba(0,0,0,.6)`; }
+  rise($('c6num'),t,22.6,.9); rise($('c6addr'),t,22.9,.9); rise($('c6fine'),t,23.2,.9,10);
+  shimmer(document.querySelector('#C6 .brand .gold'),t,21.5,2.2);
+  shimmer(document.querySelector('#c6a .gold'),t,22.2,1.8);
+}
+window.render = render;
+window.DUR = DUR;
+// pré-visualização em tempo real quando aberto no navegador sem ?frame
+if(!P.has('render')){ const t0=performance.now(); (function loop(){ render(((performance.now()-t0)/1000)%DUR); requestAnimationFrame(loop); })(); }
+</script>
+</body>
+</html>
