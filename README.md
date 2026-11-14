@@ -28,11 +28,8 @@ Aqui no GitHub fica o meu lado de código: o sistema que usamos no dia a dia da 
 
 <br>
 
-<h3 align="center">Em números</h3>
-
 <div align="center">
-  <img height="165" src="https://github-readme-stats.vercel.app/api?username=lucasrtz&show_icons=true&count_private=true&include_all_commits=true&hide_border=true&locale=pt-br&bg_color=1C1916&title_color=D1B06B&text_color=F2EDE4&icon_color=D1B06B" alt="Estatísticas do GitHub">
-  <img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=lucasrtz&layout=compact&hide_border=true&locale=pt-br&bg_color=1C1916&title_color=D1B06B&text_color=F2EDE4" alt="Linguagens mais usadas">
+  <img src="https://raw.githubusercontent.com/lucasrtz/lucasrtz/output/stats.svg" alt="Estatísticas do GitHub e linguagens mais usadas" width="100%">
 </div>
 
 <br>
