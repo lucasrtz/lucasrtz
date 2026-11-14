@@ -49,8 +49,11 @@ const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 
 // ---------- dados ----------
 async function fetchCalendar(user, token) {
-  const query = `query($login:String!){user(login:$login){contributionsCollection{contributionCalendar{
-    totalContributions weeks{contributionDays{date contributionCount contributionLevel weekday}}}}}}`;
+  const query = `query($login:String!){user(login:$login){
+    contributionsCollection{totalCommitContributions totalPullRequestContributions totalIssueContributions restrictedContributionsCount
+      contributionCalendar{totalContributions weeks{contributionDays{date contributionCount contributionLevel weekday}}}}
+    repositories(ownerAffiliations:OWNER, isFork:false, first:100){totalCount
+      nodes{stargazerCount languages(first:10, orderBy:{field:SIZE, direction:DESC}){edges{size node{name color}}}}}}}`;
   const res = await fetch('https://api.github.com/graphql', {
     method: 'POST',
     headers: { Authorization: `bearer ${token}`, 'Content-Type': 'application/json', 'User-Agent': 'chapa-de-granito' },
@@ -58,9 +61,25 @@ async function fetchCalendar(user, token) {
   });
   const json = await res.json();
   if (json.errors || !json.data?.user) throw new Error('Erro na API do GitHub: ' + JSON.stringify(json.errors || json));
-  const cal = json.data.user.contributionsCollection.contributionCalendar;
+  const u = json.data.user;
+  const cc = u.contributionsCollection;
+  const cal = cc.contributionCalendar;
+  const langs = {};
+  u.repositories.nodes.forEach((r) => r.languages.edges.forEach((e) => {
+    langs[e.node.name] = langs[e.node.name] || { size: 0, color: e.node.color || '#857C70' };
+    langs[e.node.name].size += e.size;
+  }));
   return {
     total: cal.totalContributions,
+    stats: {
+      commits: cc.totalCommitContributions,
+      prs: cc.totalPullRequestContributions,
+      issues: cc.totalIssueContributions,
+      privateCount: cc.restrictedContributionsCount,
+      repos: u.repositories.totalCount,
+      stars: u.repositories.nodes.reduce((s, r) => s + r.stargazerCount, 0),
+      langs: Object.entries(langs).map(([name, v]) => ({ name, ...v })).sort((a, b) => b.size - a.size),
+    },
     weeks: cal.weeks.map((w) => w.contributionDays.map((d) => ({ weekday: d.weekday, count: d.contributionCount, level: LEVELS[d.contributionLevel] ?? 0 }))),
   };
 }
@@ -81,7 +100,11 @@ function demoCalendar() {
     }
     weeks.push(days);
   }
-  return { total, weeks };
+  const stats = {
+    commits: 980, prs: 42, issues: 17, privateCount: 120, repos: 14, stars: 9,
+    langs: [['TypeScript', 52, '#3178c6'], ['JavaScript', 21, '#f1e05a'], ['Rust', 12, '#dea584'], ['CSS', 9, '#663399'], ['HTML', 6, '#e34c26']].map(([name, size, color]) => ({ name, size, color })),
+  };
+  return { total, weeks, stats };
 }
 
 // ---------- SVG ----------
@@ -252,6 +275,50 @@ ${legend}
 `;
 }
 
+// ---------- card de estatísticas (cores do site Arti'z Gran) ----------
+function renderStats({ total, stats }, user) {
+  const C = { dark: '#1C1916', cream: '#F2EDE4', gold: '#D1B06B', muted: '#BDB4A6', line: '#3A332B' };
+  const W = 889, H = 190;
+  const sans = "'Segoe UI',-apple-system,Helvetica,Arial,sans-serif";
+  const items = [
+    ['Contribuições no ano', total],
+    ['Commits', stats.commits + stats.privateCount],
+    ['Pull requests', stats.prs],
+    ['Repositórios', stats.repos],
+  ];
+  let nums = '';
+  items.forEach(([label, v], i) => {
+    const x = 36 + (i % 2) * 190, y = 92 + Math.floor(i / 2) * 62;
+    nums += `<text x="${x}" y="${y}" font-family="Georgia,'Times New Roman',serif" font-size="30" fill="${C.cream}">${Number(v).toLocaleString('pt-BR')}</text>`;
+    nums += `<text x="${x}" y="${y + 20}" font-family="${sans}" font-size="11" letter-spacing="1.5" fill="${C.muted}">${esc(label.toUpperCase())}</text>`;
+  });
+
+  // linguagens: barra única + legenda
+  const top = stats.langs.slice(0, 6);
+  const sum = top.reduce((s, l) => s + l.size, 0) || 1;
+  const bx = 470, bw = W - bx - 36, by = 74;
+  let bar = '', leg = '', acc = 0;
+  top.forEach((l, i) => {
+    const w = (l.size / sum) * bw;
+    bar += `<rect x="${f(bx + acc)}" y="${by}" width="${f(Math.max(w - 2, 1))}" height="10" fill="${l.color}"/>`;
+    acc += w;
+    const lx = bx + (i % 2) * (bw / 2), ly = by + 40 + Math.floor(i / 2) * 24;
+    leg += `<circle cx="${lx + 5}" cy="${ly - 4}" r="5" fill="${l.color}"/><text x="${lx + 16}" y="${ly}" font-family="${sans}" font-size="13" fill="${C.cream}">${esc(l.name)} <tspan fill="${C.muted}">${((l.size / sum) * 100).toFixed(1).replace('.', ',')}%</tspan></text>`;
+  });
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Estatísticas do GitHub de ${esc(user)}">
+<rect x=".5" y=".5" width="${W - 1}" height="${H - 1}" rx="12" fill="${C.dark}" stroke="${C.gold}" stroke-opacity=".35"/>
+<text x="36" y="40" font-family="${sans}" font-size="12" font-weight="600" letter-spacing="3" fill="${C.gold}">EM NÚMEROS · ÚLTIMO ANO</text>
+${nums}
+<line x1="${bx - 34}" y1="30" x2="${bx - 34}" y2="${H - 30}" stroke="${C.line}"/>
+<text x="${bx}" y="40" font-family="${sans}" font-size="12" font-weight="600" letter-spacing="3" fill="${C.gold}">LINGUAGENS</text>
+<clipPath id="barclip"><rect x="${bx}" y="${by}" width="${bw}" height="10" rx="5"/></clipPath>
+<g clip-path="url(#barclip)">${bar}</g>
+${leg}
+</svg>
+`;
+}
+
 (async () => {
   let cal;
   if (DEMO) cal = demoCalendar();
@@ -266,6 +333,9 @@ ${legend}
   fs.mkdirSync(path.dirname(OUT), { recursive: true });
   fs.writeFileSync(OUT, svg);
   console.log(`✔ ${OUT} gerado (${cal.total} contribuições, ${(svg.length / 1024).toFixed(0)} KB)`);
+  const statsOut = path.join(path.dirname(OUT), 'stats.svg');
+  fs.writeFileSync(statsOut, renderStats(cal, DEMO ? 'demo' : USER));
+  console.log(`✔ ${statsOut} gerado`);
 })().catch((e) => {
   console.error(e.message);
   process.exit(1);
